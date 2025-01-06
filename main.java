@@ -8,6 +8,6 @@ public class Main
         //System.out.println(numer);
         //System.out.println(denom);
         Fraction frac = new Fraction(1, 2);
-        frac.addFraction(2, 4);
+        System.out.println(frac.addFraction(2, 4));
     }
 }
