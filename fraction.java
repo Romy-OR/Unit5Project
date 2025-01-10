@@ -1,6 +1,6 @@
 public class Fraction{
-    static int numerator;
-    static int denominator;
+    private int numerator;
+    private int denominator;
     
     public Fraction(int num, int denom){
          numerator = num;
@@ -23,25 +23,62 @@ public class Fraction{
         denominator = newDenom;
     }
     
-    public String addFraction(int num2, int denom2){
+    public Fraction addFraction(Fraction frac){
         int num1 = this.numerator;
         int denom1 = this.denominator;
+        int num2 = frac.getNumerator();
+        int denom2 = frac.getDenominator();
         int common = denom1 * denom2;
         num1 = num1 * denom2;
         num2 = num2 * denom1;
-        int sum = num1 + num2;
-        return ("(" + String.valueOf(sum) + "/" + String.valueOf(common) + ")");
+        Fraction added = new Fraction((num1 + num2), common);
+        return added;
     }
     
-    public String simplify(){
-        String nnum = String.valueOf(this.numerator);
-        String ndenom = String.valueOf(this.denominator);
+    public Fraction subtractFraction(Fraction frac){
+        int num1 = this.numerator;
+        int denom1 = this.denominator;
+        int num2 = frac.getNumerator();
+        int denom2 = frac.getDenominator();
+        int common = denom1 * denom2;
+        num1 = num1 * denom2;
+        num2 = num2 * denom1;
+        Fraction subbed = new Fraction((num1 - num2), common);
+        return subbed;
+    }
+
+    public Fraction multiplyFraction(Fraction frac){
+        int num1 = this.numerator;
+        int denom1 = this.denominator;
+        int num2 = frac.getNumerator();
+        int denom2 = frac.getDenominator();
+        Fraction product = new Fraction((num1 * num2), (denom1 * denom2));
+        return product;
+    }  
+    
+    public Fraction divideFraction(Fraction frac){
+        int num1 = this.numerator;
+        int denom1 = this.denominator;
+        int num2 = frac.getNumerator();
+        int denom2 = frac.getDenominator();
+        Fraction product = new Fraction((num1 * denom2), (denom1 * num2));
+        return product;
+    }  
+    
+    public Fraction simplify(){
+        int nnum = this.numerator;
+        int ndenom = this.denominator;
         for (int i = 1; i <= (this.denominator/ 2); i++){
             if ((this.denominator % i == 0) && (this.numerator % i == 0)){
-                nnum = String.valueOf(this.numerator / i);
-                ndenom = String.valueOf(this.denominator / i);
+                nnum = this.numerator / i;
+                ndenom = this.denominator / i;
             }
         }
-        return ("(" + nnum + "/" + ndenom + ")");
+        Fraction simple = new Fraction(nnum, ndenom);
+        return simple;
+    }
+    
+    public String toString(){
+        return ("(" + String.valueOf(this.numerator) + "/" + String.valueOf(this.denominator) + ")");
     }
 }
