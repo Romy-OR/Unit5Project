@@ -68,10 +68,16 @@ public class Fraction{
     public Fraction simplify(){
         int nnum = this.numerator;
         int ndenom = this.denominator;
-        for (int i = 1; i <= (this.denominator/ 2); i++){
-            if ((this.denominator % i == 0) && (this.numerator % i == 0)){
-                nnum = this.numerator / i;
-                ndenom = this.denominator / i;
+        if (this.numerator % this.denominator == 0){
+            nnum = nnum / ndenom;
+            ndenom = 1;
+        }
+        else{
+            for (int i = 1; i <= (this.denominator/ 2); i++){
+                if ((this.denominator % i == 0) && (this.numerator % i == 0)){
+                    nnum = this.numerator / i;
+                    ndenom = this.denominator / i;
+                }
             }
         }
         Fraction simple = new Fraction(nnum, ndenom);
@@ -79,6 +85,10 @@ public class Fraction{
     }
     
     public String toString(){
-        return ("(" + String.valueOf(this.numerator) + "/" + String.valueOf(this.denominator) + ")");
+        Fraction newFrac = this.simplify();
+        if (newFrac.denominator == 1){
+            return String.valueOf(newFrac.numerator);
+        }
+        return ("(" + String.valueOf(newFrac.numerator) + "/" + String.valueOf(newFrac.denominator) + ")");
     }
 }
